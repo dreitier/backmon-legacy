@@ -1,0 +1,17 @@
+{
+	"autoload": {
+		"psr-0": {
+			"Backmon": "classes/"
+		}
+	},
+	"repositories": [
+    		{	
+        		"type":"git",
+        	      	"url": "https://github.com/mtdowling/cron-expression.git"
+    		}
+	],
+	"require": {
+		"mtdowling/cron-expression": "dev-master",
+		"ulrichsg/getopt-php": "2.3.*"
+	}
+}
