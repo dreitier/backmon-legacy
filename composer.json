@@ -12,6 +12,7 @@
 	],
 	"require": {
 		"mtdowling/cron-expression": "dev-master",
-		"ulrichsg/getopt-php": "2.3.*"
+		"ulrichsg/getopt-php": "2.3.*",
+		"jkuchar/BigFileTools": "^2.0"
 	}
 }

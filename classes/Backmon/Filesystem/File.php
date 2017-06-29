@@ -4,6 +4,7 @@ namespace Backmon\Filesystem;
 use \Backmon\Logger;
 use \Backmon\Action;
 use \Backmon\Dsl\ContextParser;
+use BigFileTools;
 
 class File {
 	public $matcher = "";
@@ -54,11 +55,12 @@ class File {
 						[
 							'matcher' => $this->matcher,
 							'filename' => $file->getFilename(),
-							'size' => $file->getSize(),
 							'mtime' => $file->getMTime(),
 							'ctime' => $file->getCTime(),
 							'atime' => $file->getATime(),
-							'path' => $file->getPath()
+							'path' => $file->getPath(),
+							// we don't use $file->getSize() b/c it does not work with files larger than 2 GB
+							'size' => BigFileTools\BigFileTools::createDefault()->getFile($file->getPathname())
 						]
 					);
 

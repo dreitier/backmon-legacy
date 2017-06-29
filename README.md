@@ -4,7 +4,9 @@ This PHP script executes monitoring and purging operations by a defined JSON fil
 The idea is that each backup script has its own JSON `backup\_definition.json* file which specifies how and when the backups are generated.
 
 ## Installation
-Get Composer to install the required dependencies.
+
+- Get Composer to install the required dependencies.
+- To use size policies with files larger than 2 GByte, you need to install php-curl.
 
 ## Usage
 `backmon` supports different command line arguments
@@ -302,6 +304,8 @@ Please note that the retention uses the __number__ of existing files and __not__
 
 #### Size
 The size retention can be used to determine a specific minimum or maximum file size of a backup, to ensure that the backup has been run. Attributes are `size`, `size\_min\_fail`, `size\_max` and `size\_max\_fail`.
+
+Please note that you need to install `php-curl` because of PHP internals files can not be larger than 2 GByte. We make use BigFileTools (https://github.com/jkuchar/BigFileTools) which fixes this problem.
 
 #### Cronjob
 The cronjob policy is implicitly executed by getting the last (=newest) backup of the sorted group and checking its ctime value against the last expected Cronjob run (global `cron` attribute).

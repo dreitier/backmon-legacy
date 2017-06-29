@@ -3,6 +3,7 @@ namespace Backmon;
 
 use \Backmon\Logger;
 use \Backmon\Policy\Util;
+use Brick\Math\BigInteger;
 
 /**
  * Entrypoint
@@ -158,10 +159,11 @@ class Runner {
 			if (isset($json['size']) || isset($json['size_max'])) {
 				$sizePolicy = new \Backmon\Policy\Size();
 			
-				$sizePolicy->min = 	(int)(isset($json['size']) ? Util::humanToByte($json['size']) : 100);
-				$sizePolicy->min_fail = (int)(isset($json['size_min_fail']) ? Util::humanToByte($json['size_min_fail']) : -1);
-				$sizePolicy->max = 	(int)(isset($json['size_max']) ? Util::humanToByte($json['size_max']) : -1);
-				$sizePolicy->max_fail = (int)(isset($json['size_max_fail']) ? Util::humanToByte($json['size_max_fail']) : -1);
+				// we have to use BigIntegers to deal with big sizes. Several GByte can not be represented as byte
+				$sizePolicy->min = 	isset($json['size']) ? Util::humanToBigNumberByte($json['size']) : BigInteger::of(100);
+				$sizePolicy->min_fail = isset($json['size_min_fail']) ? Util::humanToBigNumberByte($json['size_min_fail']) : BigInteger::of(-1);
+				$sizePolicy->max = 	isset($json['size_max']) ? Util::humanToBigNumberByte($json['size_max']) : BigInteger::of(-1);
+				$sizePolicy->max_fail = isset($json['size_max_fail']) ? Util::humanToBigNumberByte($json['size_max_fail']) : BigInteger::of(-1);
 			
 				$r->policies[] = $sizePolicy;
 			}
