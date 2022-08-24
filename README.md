@@ -1,4 +1,8 @@
-# backmon - Monitoring and purging of scheduled backups
+
+# Go to https://github.com/dreitier/backmon to follow the new version of backmon. This repository is deprecated.
+
+---
+
 This PHP script executes monitoring and purging operations by a defined JSON file.
 
 The idea behind *backmon* is that each backup has its own JSON `backup_definition.json` file which specifies how and when the backups are generated. *backmon* inspects the backup definition file(s) and can derive if a backup process has not been run or if old backups have to be discarded.
